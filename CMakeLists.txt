@@ -41,7 +41,7 @@ set(LG_SOURCE
 FetchContent_Declare(
   epaper
   GIT_REPOSITORY https://github.com/Vinzenz82/ws-e-paper.git
-  GIT_TAG ecdd8cf
+  GIT_TAG 1a2eef6 
 
 )
 FetchContent_MakeAvailable(epaper)
@@ -160,12 +160,14 @@ target_link_directories(HelloWorld PRIVATE
 
 target_link_libraries(HelloWorld PRIVATE m CURL::libcurl z)
 
-# add_custom_command(TARGET HelloWorld POST_BUILD
+add_custom_command(TARGET HelloWorld POST_BUILD
 # #                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 # #                    COMMAND python3 -m venv ${CMAKE_CURRENT_BINARY_DIR}/.venv
 # #                    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/.venv/bin/pip install patchelf
 # #                    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/.venv/bin/patchelf --set-interpreter /lib/ld-linux-armhf.so.3 ${CMAKE_CURRENT_BINARY_DIR}/HelloWorld
 #                     COMMAND scp ${CMAKE_CURRENT_BINARY_DIR}/HelloWorld scp://vinzenz@192.168.1.209
 #                     #COMMAND scp ${PROJECT_SOURCE_DIR}/src/pictures/cat_mouse.bmp scp://vinzenz@192.168.1.209
-#                   )
+                      COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/pic/
+                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/cat_mouse.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
+                   )
 

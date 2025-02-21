@@ -61,6 +61,17 @@
         "unordered_set": "cpp",
         "optional": "cpp",
         "iomanip": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "any": "cpp",
+        "bitset": "cpp",
+        "codecvt": "cpp",
+        "csignal": "cpp",
+        "cstring": "cpp",
+        "map": "cpp",
+        "regex": "cpp",
+        "fstream": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "variant": "cpp"
     }
 }

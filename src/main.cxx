@@ -86,6 +86,9 @@ void openweather(std::string msg)
     curl = curl_easy_init();
     std::string stream;
 
+    time_t sttime;
+    char ctime[80];
+
     if(curl == NULL){
         std::cerr << "curl_easy_init fails..." << std::endl;
         return;
@@ -103,6 +106,46 @@ void openweather(std::string msg)
             if (res != CURLE_OK)
             {
                 std::cout << "CURL error: " << curl_easy_strerror(res) << std::endl;
+            }
+            else {
+                nlohmann::json weatherData;
+                try
+                {
+                    weatherData = nlohmann::json::parse(stream);
+                }
+                catch (nlohmann::json::parse_error& e)
+                {
+                    std::cout << "Error parsing JSON: " << e.what() << std::endl;
+                    return;
+                }
+    
+                try
+                {
+                    time(&sttime);
+                    struct tm* data = localtime(&sttime);
+
+                    double temperature = weatherData["main"]["temp"].get<double>() - 273.15;
+                    double humidity = weatherData["main"]["humidity"];
+                    double pressure = weatherData["main"]["pressure"];
+                    double windSpeed = weatherData["wind"]["speed"];
+                    std::string weatherDescription = weatherData["weather"][0]["description"];
+                    std::string stationName = weatherData["name"];
+    
+                    std::cout << "Letzte Aktualisiserung: " << std::endl;
+                    strftime(ctime, 80, "Uhrzeit: %H:%M", data);
+                    std::cout << ctime;
+    
+                    std::cout << "\nTemperature: " << temperature << " stopni Celsjusza" << std::endl;
+                    std::cout << "Hidity: " << humidity << "%" << std::endl;
+                    std::cout << "Pressure: " << pressure << "hPa" << std::endl;
+                    std::cout << "Descrription: " << weatherDescription << std::endl;
+                    std::cout << "Wind Speed: " << windSpeed << " m/s" << std::endl;
+                    std::cout << "Station Name: " << stationName << std::endl;
+                }
+                catch (nlohmann::json::exception& e)
+                {
+                    std::cout << "Error: " << e.what() << std::endl;
+                }                
             }
 
             lgGpioWrite(handle_lg, PIN_LED_GREEN, LED_ON);
