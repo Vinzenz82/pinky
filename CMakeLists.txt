@@ -40,7 +40,8 @@ set(LG_SOURCE
 #
 FetchContent_Declare(
   epaper
-  URL https://github.com/waveshareteam/e-Paper/archive/refs/heads/master.zip
+  GIT_REPOSITORY https://github.com/Vinzenz82/ws-e-paper.git
+  GIT_TAG ecdd8cf
 
 )
 FetchContent_MakeAvailable(epaper)
@@ -68,18 +69,18 @@ set(EPAPER_SOURCE
 # set(BUILD_STATIC_LIBS ON CACHE INTERNAL "Build static libraries")
 # set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "Build shared libraries")
 # set(BUILD_STATIC_CURL ON CACHE INTERNAL "Build curl executable with static libcurl")
-# set(HTTP_ONLY ON CACHE INTERNAL "disables all protocols except HTTP (This overrides all CURL_DISABLE_* options)")
-# set(CURL_ENABLE_SSL OFF CACHE INTERNAL "Enable SSL support")
-# set(USE_LIBIDN2 OFF CACHE INTERNAL "Use libidn2 for IDN support")
-# set(BUILD_CURL_EXE OFF CACHE INTERNAL "Set to ON to build curl executable.")
+set(HTTP_ONLY ON CACHE INTERNAL "disables all protocols except HTTP (This overrides all CURL_DISABLE_* options)")
+set(CURL_ENABLE_SSL OFF CACHE INTERNAL "Enable SSL support")
+#set(USE_LIBIDN2 OFF CACHE INTERNAL "Use libidn2 for IDN support")
+set(BUILD_CURL_EXE OFF CACHE INTERNAL "Set to ON to build curl executable.")
 
-# FetchContent_Declare(
-#   curl
-#   GIT_REPOSITORY https://github.com/curl/curl.git
-#   GIT_TAG        172e54c
-# )
-# FetchContent_MakeAvailable(curl)
-# find_package(curl)
+FetchContent_Declare(
+  curl
+  GIT_REPOSITORY https://github.com/curl/curl.git
+  GIT_TAG        172e54c
+)
+FetchContent_MakeAvailable(curl)
+find_package(curl)
 
 #--------------------------------------------------------------------------
 
@@ -119,7 +120,8 @@ target_include_directories(HelloWorld PUBLIC
                             ${epaper_SOURCE_DIR}/RaspberryPi_JetsonNano/c/lib/Fonts
                             ${epaper_SOURCE_DIR}/RaspberryPi_JetsonNano/c/examples/
                             ${json_SOURCE_DIR}/single_include/nlohmann
-
+                            ${curl_SOURCE_DIR}/include/curl
+                            ${PROJECT_SOURCE_DIR}/src/epaper
 )
 
 target_compile_definitions(HelloWorld PUBLIC
@@ -149,21 +151,21 @@ target_link_options(HelloWorld PUBLIC
                     #  -Wl,--as-needed 
                     #  -Wl,-z,relro,-z,now
                     # --sysroot=${TOOLCHAIN_SYSROOT}
-                    --static
+                    #--static
                      )
 
 target_link_directories(HelloWorld PRIVATE
                         ${PROJECT_SOURCE_DIR}/src/external
                         )
 
-target_link_libraries(HelloWorld PRIVATE m curl z) #CURL::libcurl
+target_link_libraries(HelloWorld PRIVATE m CURL::libcurl z)
 
-add_custom_command(TARGET HelloWorld POST_BUILD
-#                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-#                    COMMAND python3 -m venv ${CMAKE_CURRENT_BINARY_DIR}/.venv
-#                    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/.venv/bin/pip install patchelf
-#                    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/.venv/bin/patchelf --set-interpreter /lib/ld-linux-armhf.so.3 ${CMAKE_CURRENT_BINARY_DIR}/HelloWorld
-                    COMMAND scp ${CMAKE_CURRENT_BINARY_DIR}/HelloWorld scp://vinzenz@192.168.1.209
-                    #COMMAND scp ${PROJECT_SOURCE_DIR}/src/pictures/cat_mouse.bmp scp://vinzenz@192.168.1.209
-                  )
+# add_custom_command(TARGET HelloWorld POST_BUILD
+# #                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+# #                    COMMAND python3 -m venv ${CMAKE_CURRENT_BINARY_DIR}/.venv
+# #                    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/.venv/bin/pip install patchelf
+# #                    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/.venv/bin/patchelf --set-interpreter /lib/ld-linux-armhf.so.3 ${CMAKE_CURRENT_BINARY_DIR}/HelloWorld
+#                     COMMAND scp ${CMAKE_CURRENT_BINARY_DIR}/HelloWorld scp://vinzenz@192.168.1.209
+#                     #COMMAND scp ${PROJECT_SOURCE_DIR}/src/pictures/cat_mouse.bmp scp://vinzenz@192.168.1.209
+#                   )
 

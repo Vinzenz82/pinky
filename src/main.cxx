@@ -6,12 +6,10 @@
 #include <lgpio.h> // lg
 
 // openweather
-#include <curl/curl.h>
+#include <curl.h>
 #include <json.hpp>  
 
-// to rework:
-#include "EPD_4in2_V2.h"
-#include "EPD_Test.h" 
+#include <epaper_ifc.h>
 
 #define PIN_LED_RED 21
 #define PIN_LED_YELLOW 20
