@@ -135,8 +135,8 @@ void openweather(std::string msg)
                     strftime(ctime, 80, "Uhrzeit: %H:%M", data);
                     std::cout << ctime;
     
-                    std::cout << "\nTemperature: " << temperature << " stopni Celsjusza" << std::endl;
-                    std::cout << "Hidity: " << humidity << "%" << std::endl;
+                    std::cout << "\nTemperature: " << temperature << " °C" << std::endl;
+                    std::cout << "Humidity: " << humidity << "%" << std::endl;
                     std::cout << "Pressure: " << pressure << "hPa" << std::endl;
                     std::cout << "Descrription: " << weatherDescription << std::endl;
                     std::cout << "Wind Speed: " << windSpeed << " m/s" << std::endl;
@@ -147,6 +147,7 @@ void openweather(std::string msg)
                     std::cout << "Error: " << e.what() << std::endl;
                 }                
             }
+            curl_easy_cleanup(curl);
 
             lgGpioWrite(handle_lg, PIN_LED_GREEN, LED_ON);
             std::cout << "openweather says: " << std::endl;
