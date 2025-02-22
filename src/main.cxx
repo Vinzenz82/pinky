@@ -147,7 +147,7 @@ void openweather(std::string msg)
                     std::cout << "Error: " << e.what() << std::endl;
                 }                
             }
-            curl_easy_cleanup(curl);
+            
 
             lgGpioWrite(handle_lg, PIN_LED_GREEN, LED_ON);
             std::cout << "openweather says: " << std::endl;
@@ -159,6 +159,7 @@ void openweather(std::string msg)
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     }
+    curl_easy_cleanup(curl);
 }
 
 void task3(std::string msg)
