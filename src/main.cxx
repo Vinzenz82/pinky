@@ -96,7 +96,7 @@ void display(std::string msg)
             yStart += 36;
 
             // Sunset
-            Paint_DrawString_EN(150, yStart, "Sonnenuntergang", &Font24, WHITE, BLACK);
+            Paint_DrawString_EN(140, yStart, "Sonnenuntergang", &Font24, WHITE, BLACK);
             yStart += 26;
             Paint_DrawString_EN(230, yStart, &ctime_sunset[0], &Font24, WHITE, BLACK);
             yStart += 26;
@@ -183,7 +183,7 @@ void openweather(std::string msg)
     
                     strftime(ctime_update, 80, "Letzte Aktualisiserung: %H:%M Uhr", data);
                     data = localtime(&sunset);
-                    strftime(ctime_sunset, 60, "%H:%M", data);
+                    strftime(ctime_sunset, 60, "%H:%M Uhr", data);
 
                     std::cout << ctime_update;
     
