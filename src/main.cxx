@@ -88,7 +88,7 @@ void display(std::string msg)
 
             //description
             snprintf(buffer, 60, "%s", weatherDescription.c_str());
-            Paint_DrawString_EN(200, yStart, &buffer[0] , &Font24, WHITE, BLACK);
+            Paint_DrawString_EN(170, yStart, &buffer[0] , &Font24, WHITE, BLACK);
             yStart += 46;
 
             // last update
