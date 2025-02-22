@@ -26,6 +26,8 @@ int handle_lg;
 double temperature = 0;
 double pressure = 0;
 double windSpeed = 0;
+char ctime_update[80];
+std::string stationName;
 
 void display(std::string msg)
 {
@@ -61,12 +63,12 @@ void display(std::string msg)
             std::cout << "show window BMP-----------------" << std::endl;
             Paint_SelectImage(BlackImage);
             Paint_Clear(WHITE);
-            GUI_ReadBmp("./pic/sun.bmp", 10, 10);
+            GUI_ReadBmp("./pic/sun_smile.bmp", 10, 10);
 
             yStart = 10;
             
-            Paint_DrawString_EN(200, yStart, "Wilsdruff", &Font24, WHITE, BLACK);
-            yStart += 36;
+            Paint_DrawString_EN(200, yStart, stationName.c_str() , &Font24, WHITE, BLACK);
+            yStart += 46;
         
             Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
             yStart += 26;
@@ -82,6 +84,9 @@ void display(std::string msg)
             snprintf(buffer, 10, "%.1fm/s", windSpeed);
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 26;
+
+            // last update
+            Paint_DrawString_EN(10, 270, &ctime_update[0], &Font16, WHITE, BLACK);
         
             EPD_4IN2_V2_Display(BlackImage);
             DEV_Delay_ms(2000);
@@ -116,7 +121,7 @@ void openweather(std::string msg)
     std::string stream;
 
     time_t sttime;
-    char ctime[80];
+    
 
     if(curl == NULL){
         std::cerr << "curl_easy_init fails..." << std::endl;
@@ -159,11 +164,10 @@ void openweather(std::string msg)
                     pressure = weatherData["main"]["pressure"];
                     windSpeed = weatherData["wind"]["speed"];
                     std::string weatherDescription = weatherData["weather"][0]["description"];
-                    std::string stationName = weatherData["name"];
+                    stationName = weatherData["name"];
     
-                    std::cout << "Letzte Aktualisiserung: " << std::endl;
-                    strftime(ctime, 80, "Uhrzeit: %H:%M", data);
-                    std::cout << ctime;
+                    strftime(ctime_update, 80, "Letzte Aktualisiserung: %H:%M", data);
+                    std::cout << ctime_update;
     
                     std::cout << "\nTemperature: " << temperature << " °C" << std::endl;
                     std::cout << "Humidity: " << humidity << "%" << std::endl;
