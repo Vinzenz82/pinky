@@ -61,6 +61,8 @@ void display(std::string msg)
             Paint_SelectImage(BlackImage);
             Paint_Clear(WHITE);
             GUI_ReadBmp("./pic/snowman.bmp", 10, 10);
+
+            yStart = 10;
             
             Paint_DrawString_EN(200, yStart, "Wilsdruff", &Font24, WHITE, BLACK);
             yStart += 26;
