@@ -28,6 +28,7 @@ double pressure = 0;
 double windSpeed = 0;
 char ctime_update[80];
 std::string stationName;
+std::string weatherDescription;
 
 void display(std::string msg)
 {
@@ -65,7 +66,7 @@ void display(std::string msg)
             std::cout << "show window BMP-----------------" << std::endl;
             Paint_SelectImage(BlackImage);
             Paint_Clear(WHITE);
-            GUI_ReadBmp("./pic/sun_smile.bmp", 10, 10);
+            GUI_ReadBmp("./pic/sun_smile.bmp", 1, 1);
 
             yStart = 10;
             
@@ -75,18 +76,20 @@ void display(std::string msg)
         
             Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
             yStart += 26;
-        
             snprintf(buffer, 10, "%.1foC", temperature);
-            std::cout << "Temp: " << buffer << std::endl;
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 36;
         
             Paint_DrawString_EN(200, yStart, "Wind", &Font24, WHITE, BLACK);
             yStart += 26;
-        
             snprintf(buffer, 10, "%.1fm/s", windSpeed);
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
-            yStart += 26;
+            yStart += 36;
+
+            //description
+            snprintf(buffer, 60, "%s", weatherDescription.c_str());
+            Paint_DrawString_EN(200, yStart, &buffer[0] , &Font24, WHITE, BLACK);
+            yStart += 46;
 
             // last update
             Paint_DrawString_EN(10, 270, &ctime_update[0], &Font16, WHITE, BLACK);
@@ -134,7 +137,7 @@ void openweather(std::string msg)
             lgGpioWrite(handle_lg, PIN_LED_GREEN, LED_ON);
 
             stream.clear();
-            curl_easy_setopt(curl, CURLOPT_URL, "http://api.openweathermap.org/data/2.5/weather?q=Wilsdruff,de&appid=01bfc1473b89420ac08c560a25c1b535");
+            curl_easy_setopt(curl, CURLOPT_URL, "http://api.openweathermap.org/data/2.5/weather?q=Wilsdruff,de&lang=de&appid=01bfc1473b89420ac08c560a25c1b535");
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, &stream);
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
             res = curl_easy_perform(curl);
@@ -164,7 +167,7 @@ void openweather(std::string msg)
                     double humidity = weatherData["main"]["humidity"];
                     pressure = weatherData["main"]["pressure"];
                     windSpeed = weatherData["wind"]["speed"];
-                    std::string weatherDescription = weatherData["weather"][0]["description"];
+                    weatherDescription = weatherData["weather"][0]["description"];
                     stationName = weatherData["name"];
     
                     strftime(ctime_update, 80, "Letzte Aktualisiserung: %H:%M", data);
