@@ -169,5 +169,6 @@ add_custom_command(TARGET HelloWorld POST_BUILD
 #                     #COMMAND scp ${PROJECT_SOURCE_DIR}/src/pictures/cat_mouse.bmp scp://vinzenz@192.168.1.209
                       COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/pic/
                       COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/cat_mouse.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
+                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/snowman.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
                    )
 

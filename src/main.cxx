@@ -50,7 +50,7 @@ void display(std::string msg)
     std::cout << "show window BMP-----------------" << std::endl;
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
-    GUI_ReadBmp("./pic/cat_mouse.bmp", 10, 10);
+    GUI_ReadBmp("./pic/snowman.bmp", 10, 10);
     EPD_4IN2_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
 
@@ -98,6 +98,7 @@ void openweather(std::string msg)
         {
             std::lock_guard<std::mutex> guard(g_pages_mutex);
 
+            stream.clear();
             curl_easy_setopt(curl, CURLOPT_URL, "http://api.openweathermap.org/data/2.5/weather?q=Wilsdruff,de&appid=01bfc1473b89420ac08c560a25c1b535");
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, &stream);
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
