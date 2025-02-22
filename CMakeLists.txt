@@ -54,6 +54,7 @@ set(EPAPER_SOURCE
                 ${epaper_SOURCE_DIR}/RaspberryPi_JetsonNano/c/lib/GUI/GUI_BMPfile.c
                 ${epaper_SOURCE_DIR}/RaspberryPi_JetsonNano/c/lib/GUI/GUI_Paint.c
                 ${epaper_SOURCE_DIR}/RaspberryPi_JetsonNano/c/lib/e-Paper/EPD_4in2_V2.c
+                ${epaper_SOURCE_DIR}/RaspberryPi_JetsonNano/c/lib/Fonts/font24.c
                 ${epaper_SOURCE_DIR}/RaspberryPi_JetsonNano/c/lib/Fonts/font20.c
                 ${epaper_SOURCE_DIR}/RaspberryPi_JetsonNano/c/lib/Fonts/font16.c
                 ${epaper_SOURCE_DIR}/RaspberryPi_JetsonNano/c/lib/Fonts/font12.c
