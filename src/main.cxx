@@ -65,21 +65,21 @@ void display(std::string msg)
             yStart = 10;
             
             Paint_DrawString_EN(200, yStart, "Wilsdruff", &Font24, WHITE, BLACK);
-            yStart += 26;
+            yStart += 36;
         
             Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
             yStart += 26;
         
-            snprintf(buffer, 10, "%f", temperature);
+            snprintf(buffer, 10, "%.1f°C", temperature);
             std::cout << "Temp: " << buffer << std::endl;
-            Paint_DrawString_EN(220, yStart, &buffer[0], &Font24, WHITE, BLACK);
+            Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 26;
         
             Paint_DrawString_EN(200, yStart, "Luftdruck", &Font24, WHITE, BLACK);
             yStart += 26;
         
-            snprintf(buffer, 10, "%f", pressure);
-            Paint_DrawString_EN(220, yStart, &buffer[0], &Font24, WHITE, BLACK);
+            snprintf(buffer, 10, "%.1fhPa", pressure);
+            Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 26;
         
             EPD_4IN2_V2_Display(BlackImage);
