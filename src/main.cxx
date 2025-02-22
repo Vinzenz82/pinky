@@ -27,6 +27,7 @@ double temperature = 0;
 double pressure = 0;
 double windSpeed = 0;
 char ctime_update[80];
+char ctime_sunset[60];
 std::string stationName;
 std::string weatherDescription;
 
@@ -70,32 +71,39 @@ void display(std::string msg)
 
             yStart = 10;
             
+            // Station Name
             snprintf(buffer, 60, "%s", stationName.c_str());
             Paint_DrawString_EN(200, yStart, &buffer[0] , &Font24, WHITE, BLACK);
             yStart += 46;
         
+            // Temp
             Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
             yStart += 26;
             snprintf(buffer, 10, "%.1foC", temperature);
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 36;
         
+            // Wind
             Paint_DrawString_EN(200, yStart, "Wind", &Font24, WHITE, BLACK);
             yStart += 26;
             snprintf(buffer, 10, "%.1fm/s", windSpeed);
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 36;
 
-            //description
+            // Description
             snprintf(buffer, 60, "%s", weatherDescription.c_str());
             Paint_DrawString_EN(170, yStart, &buffer[0] , &Font24, WHITE, BLACK);
-            yStart += 46;
+            yStart += 36;
+
+            // Sunset
+            Paint_DrawString_EN(10, yStart, &ctime_sunset[0], &Font24, WHITE, BLACK);
+            yStart += 26;
 
             // last update
             Paint_DrawString_EN(10, 270, &ctime_update[0], &Font16, WHITE, BLACK);
         
             EPD_4IN2_V2_Display(BlackImage);
-            DEV_Delay_ms(2000);
+            //DEV_Delay_ms(2000);
 
             
             std::cout << "display done..." << std::endl;
@@ -169,8 +177,12 @@ void openweather(std::string msg)
                     windSpeed = weatherData["wind"]["speed"];
                     weatherDescription = weatherData["weather"][0]["description"];
                     stationName = weatherData["name"];
+                    time_t sunset = weatherData["sys"]["sunset"];
     
                     strftime(ctime_update, 80, "Letzte Aktualisiserung: %H:%M", data);
+                    data = localtime(&sunset);
+                    strftime(ctime_sunset, 60, "Sonnenuntergang: %H:%M", data);
+
                     std::cout << ctime_update;
     
                     std::cout << "\nTemperature: " << temperature << " °C" << std::endl;
@@ -178,7 +190,9 @@ void openweather(std::string msg)
                     std::cout << "Pressure: " << pressure << "hPa" << std::endl;
                     std::cout << "Description: " << weatherDescription << std::endl;
                     std::cout << "Wind Speed: " << windSpeed << " m/s" << std::endl;
+                    std::cout << "Sunset: " << ctime_update << std::endl;
                     std::cout << "Station Name: " << stationName << std::endl;
+
                 }
                 catch (nlohmann::json::exception& e)
                 {
