@@ -61,7 +61,7 @@ void display(std::string msg)
             std::cout << "show window BMP-----------------" << std::endl;
             Paint_SelectImage(BlackImage);
             Paint_Clear(WHITE);
-            GUI_ReadBmp("./pic/HanniSonne.bmp", 10, 10);
+            GUI_ReadBmp("./pic/sun.bmp", 10, 10);
 
             yStart = 10;
             

@@ -171,6 +171,6 @@ add_custom_command(TARGET HelloWorld POST_BUILD
                       COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/pic/
                       COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/cat_mouse.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
                       COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/snowman.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
-                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/HanniSonne.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
+                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/sun.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
                    )
 
