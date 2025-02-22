@@ -23,8 +23,14 @@ std::mutex g_pages_mutex;
 
 int handle_lg;
 
+double temperature = 0;
+double pressure = 0;
+
 void display(std::string msg)
 {
+    char buffer[10];
+    uint16_t yStart = 10;
+
     if(DEV_Module_Init()!=0){
         std::cerr << "DEV_Module_Init fails..." << std::endl;
         return;
@@ -51,9 +57,24 @@ void display(std::string msg)
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     GUI_ReadBmp("./pic/snowman.bmp", 10, 10);
-    Paint_DrawString_EN(200, 10, "Wilsdruff", &Font24, WHITE, BLACK);
-    Paint_DrawString_EN(200, 36, "Temperatur: 10°C", &Font24, WHITE, BLACK);
-    Paint_DrawString_EN(200, 54, "Luftdruck: 111bar", &Font24, WHITE, BLACK);
+    
+    Paint_DrawString_EN(200, yStart, "Wilsdruff", &Font24, WHITE, BLACK);
+    yStart += 26;
+
+    Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
+    yStart += 26;
+
+    snprintf(buffer, 10, "%d", temperature);
+    Paint_DrawString_EN(200, yStart, buffer, &Font24, WHITE, BLACK);
+    yStart += 26;
+
+    Paint_DrawString_EN(200, yStart, "Luftdruck", &Font24, WHITE, BLACK);
+    yStart += 26;
+
+    snprintf(buffer, 10, "%d", pressure);
+    Paint_DrawString_EN(200, yStart, buffer, &Font24, WHITE, BLACK);
+    yStart += 26;
+
     EPD_4IN2_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
 
@@ -128,9 +149,9 @@ void openweather(std::string msg)
                     time(&sttime);
                     struct tm* data = localtime(&sttime);
 
-                    double temperature = weatherData["main"]["temp"].get<double>() - 273.15;
+                    temperature = weatherData["main"]["temp"].get<double>() - 273.15;
                     double humidity = weatherData["main"]["humidity"];
-                    double pressure = weatherData["main"]["pressure"];
+                    pressure = weatherData["main"]["pressure"];
                     double windSpeed = weatherData["wind"]["speed"];
                     std::string weatherDescription = weatherData["weather"][0]["description"];
                     std::string stationName = weatherData["name"];
