@@ -51,6 +51,9 @@ void display(std::string msg)
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     GUI_ReadBmp("./pic/snowman.bmp", 10, 10);
+    Paint_DrawString_EN(10, 0, "Wilsdruff", &Font16, BLACK, WHITE);
+    Paint_DrawString_EN(10, 0, "Temperatur: 10°C", &Font16, BLACK, WHITE);
+    Paint_DrawString_EN(10, 0, "Luftdruck: 111bar", &Font16, BLACK, WHITE);
     EPD_4IN2_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
 
@@ -139,7 +142,7 @@ void openweather(std::string msg)
                     std::cout << "\nTemperature: " << temperature << " °C" << std::endl;
                     std::cout << "Humidity: " << humidity << "%" << std::endl;
                     std::cout << "Pressure: " << pressure << "hPa" << std::endl;
-                    std::cout << "Descrription: " << weatherDescription << std::endl;
+                    std::cout << "Description: " << weatherDescription << std::endl;
                     std::cout << "Wind Speed: " << windSpeed << " m/s" << std::endl;
                     std::cout << "Station Name: " << stationName << std::endl;
                 }
