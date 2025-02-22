@@ -68,7 +68,7 @@ void display(std::string msg)
             Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
             yStart += 26;
         
-            snprintf(buffer, 10, "%d", temperature);
+            snprintf(buffer, 10, "%f", temperature);
             std::cout << "Temp: " << buffer << std::endl;
             Paint_DrawString_EN(220, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 26;
@@ -76,7 +76,7 @@ void display(std::string msg)
             Paint_DrawString_EN(200, yStart, "Luftdruck", &Font24, WHITE, BLACK);
             yStart += 26;
         
-            snprintf(buffer, 10, "%d", pressure);
+            snprintf(buffer, 10, "%f", pressure);
             Paint_DrawString_EN(220, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 26;
         
