@@ -51,9 +51,9 @@ void display(std::string msg)
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     GUI_ReadBmp("./pic/snowman.bmp", 10, 10);
-    Paint_DrawString_EN(10, 200, "Wilsdruff", &Font24, WHITE, BLACK);
-    Paint_DrawString_EN(36, 200, "Temperatur: 10°C", &Font24, WHITE, BLACK);
-    Paint_DrawString_EN(54, 200, "Luftdruck: 111bar", &Font24, WHITE, BLACK);
+    Paint_DrawString_EN(200, 10, "Wilsdruff", &Font24, WHITE, BLACK);
+    Paint_DrawString_EN(200, 36, "Temperatur: 10°C", &Font24, WHITE, BLACK);
+    Paint_DrawString_EN(200, 54, "Luftdruck: 111bar", &Font24, WHITE, BLACK);
     EPD_4IN2_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
 
