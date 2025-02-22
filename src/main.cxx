@@ -31,7 +31,7 @@ std::string stationName;
 
 void display(std::string msg)
 {
-    char buffer[10];
+    char buffer[80];
     uint16_t yStart = 10;
 
     if(DEV_Module_Init()!=0){
@@ -57,6 +57,8 @@ void display(std::string msg)
         {
             std::lock_guard<std::mutex> guard(g_pages_mutex);
 
+            lgGpioWrite(handle_lg, PIN_LED_RED, LED_ON);
+
             std::cout << "Paint_NewImage..." << std::endl;
             Paint_NewImage(BlackImage, EPD_4IN2_V2_WIDTH, EPD_4IN2_V2_HEIGHT, 0, WHITE);
         
@@ -67,7 +69,8 @@ void display(std::string msg)
 
             yStart = 10;
             
-            Paint_DrawString_EN(200, yStart, stationName.c_str() , &Font24, WHITE, BLACK);
+            snprintf(buffer, 60, "%s", stationName.c_str());
+            Paint_DrawString_EN(200, yStart, &buffer[0] , &Font24, WHITE, BLACK);
             yStart += 46;
         
             Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
@@ -91,12 +94,8 @@ void display(std::string msg)
             EPD_4IN2_V2_Display(BlackImage);
             DEV_Delay_ms(2000);
 
-            lgGpioWrite(handle_lg, PIN_LED_RED, LED_ON);
-            std::cout << "Task1 says: " << std::endl;
-            for (std::size_t x = 0, length = msg.length(); x != length; ++x) {
-                std::cout << msg[x] << std::endl;
-                std::this_thread::sleep_for(std::chrono::milliseconds(288));
-            }
+            
+            std::cout << "display done..." << std::endl;
             lgGpioWrite(handle_lg, PIN_LED_RED, LED_OFF);
         }
         std::this_thread::sleep_for(std::chrono::minutes(5));
@@ -131,6 +130,8 @@ void openweather(std::string msg)
     while(true) {
         {
             std::lock_guard<std::mutex> guard(g_pages_mutex);
+
+            lgGpioWrite(handle_lg, PIN_LED_GREEN, LED_ON);
 
             stream.clear();
             curl_easy_setopt(curl, CURLOPT_URL, "http://api.openweathermap.org/data/2.5/weather?q=Wilsdruff,de&appid=01bfc1473b89420ac08c560a25c1b535");
@@ -181,14 +182,8 @@ void openweather(std::string msg)
                     std::cout << "Error: " << e.what() << std::endl;
                 }                
             }
-            
 
-            lgGpioWrite(handle_lg, PIN_LED_GREEN, LED_ON);
-            std::cout << "openweather says: " << std::endl;
-            for (std::size_t x = 0, length = msg.length(); x != length; ++x) {
-                std::cout << msg[x] << std::endl;
-                std::this_thread::sleep_for(std::chrono::milliseconds(344));
-            }
+            std::cout << "openweather done..." << std::endl;
             lgGpioWrite(handle_lg, PIN_LED_GREEN, LED_OFF);
         }
         std::this_thread::sleep_for(std::chrono::seconds(60));
