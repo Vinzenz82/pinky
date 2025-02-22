@@ -69,6 +69,7 @@ void display(std::string msg)
             yStart += 26;
         
             snprintf(buffer, 10, "%d", temperature);
+            std::cout << "Temp: " << buffer << std::endl;
             Paint_DrawString_EN(220, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 26;
         
@@ -81,7 +82,7 @@ void display(std::string msg)
         
             EPD_4IN2_V2_Display(BlackImage);
             DEV_Delay_ms(2000);
-            
+
             lgGpioWrite(handle_lg, PIN_LED_RED, LED_ON);
             std::cout << "Task1 says: " << std::endl;
             for (std::size_t x = 0, length = msg.length(); x != length; ++x) {
