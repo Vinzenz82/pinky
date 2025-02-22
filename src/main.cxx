@@ -50,37 +50,38 @@ void display(std::string msg)
         return ;
     }
 
-    std::cout << "Paint_NewImage..." << std::endl;
-    Paint_NewImage(BlackImage, EPD_4IN2_V2_WIDTH, EPD_4IN2_V2_HEIGHT, 0, WHITE);
-
-    std::cout << "show window BMP-----------------" << std::endl;
-    Paint_SelectImage(BlackImage);
-    Paint_Clear(WHITE);
-    GUI_ReadBmp("./pic/snowman.bmp", 10, 10);
-    
-    Paint_DrawString_EN(200, yStart, "Wilsdruff", &Font24, WHITE, BLACK);
-    yStart += 26;
-
-    Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
-    yStart += 26;
-
-    snprintf(buffer, 10, "%d", temperature);
-    Paint_DrawString_EN(200, yStart, buffer, &Font24, WHITE, BLACK);
-    yStart += 26;
-
-    Paint_DrawString_EN(200, yStart, "Luftdruck", &Font24, WHITE, BLACK);
-    yStart += 26;
-
-    snprintf(buffer, 10, "%d", pressure);
-    Paint_DrawString_EN(200, yStart, buffer, &Font24, WHITE, BLACK);
-    yStart += 26;
-
-    EPD_4IN2_V2_Display(BlackImage);
-    DEV_Delay_ms(2000);
-
     while(true) {
         {
             std::lock_guard<std::mutex> guard(g_pages_mutex);
+
+            std::cout << "Paint_NewImage..." << std::endl;
+            Paint_NewImage(BlackImage, EPD_4IN2_V2_WIDTH, EPD_4IN2_V2_HEIGHT, 0, WHITE);
+        
+            std::cout << "show window BMP-----------------" << std::endl;
+            Paint_SelectImage(BlackImage);
+            Paint_Clear(WHITE);
+            GUI_ReadBmp("./pic/snowman.bmp", 10, 10);
+            
+            Paint_DrawString_EN(200, yStart, "Wilsdruff", &Font24, WHITE, BLACK);
+            yStart += 26;
+        
+            Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
+            yStart += 26;
+        
+            snprintf(buffer, 10, "%d", temperature);
+            Paint_DrawString_EN(220, yStart, &buffer[0], &Font24, WHITE, BLACK);
+            yStart += 26;
+        
+            Paint_DrawString_EN(200, yStart, "Luftdruck", &Font24, WHITE, BLACK);
+            yStart += 26;
+        
+            snprintf(buffer, 10, "%d", pressure);
+            Paint_DrawString_EN(220, yStart, &buffer[0], &Font24, WHITE, BLACK);
+            yStart += 26;
+        
+            EPD_4IN2_V2_Display(BlackImage);
+            DEV_Delay_ms(2000);
+            
             lgGpioWrite(handle_lg, PIN_LED_RED, LED_ON);
             std::cout << "Task1 says: " << std::endl;
             for (std::size_t x = 0, length = msg.length(); x != length; ++x) {
@@ -89,7 +90,7 @@ void display(std::string msg)
             }
             lgGpioWrite(handle_lg, PIN_LED_RED, LED_OFF);
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::minutes(5));
     }
 }
 
