@@ -144,6 +144,7 @@ target_compile_options(HelloWorld PUBLIC
                     #   -Wformat-security 
                     #   -Werror=format-security 
                     #   --sysroot=${TOOLCHAIN_SYSROOT}
+                        -Wno-psabi
                  )
 
 target_link_options(HelloWorld PUBLIC 

@@ -79,14 +79,14 @@ void display(std::string msg)
             // Temp
             Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
             yStart += 26;
-            snprintf(buffer, 10, "%.1foC", temperature);
+            snprintf(buffer, 10, "10%.1foC", temperature);
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 36;
         
             // Wind
             Paint_DrawString_EN(200, yStart, "Wind", &Font24, WHITE, BLACK);
             yStart += 26;
-            snprintf(buffer, 10, "%.1fm/s", windSpeed);
+            snprintf(buffer, 10, "10%.1fm/s", windSpeed);
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 36;
 
@@ -96,7 +96,9 @@ void display(std::string msg)
             yStart += 36;
 
             // Sunset
-            Paint_DrawString_EN(10, yStart, &ctime_sunset[0], &Font24, WHITE, BLACK);
+            Paint_DrawString_EN(170, yStart, "Sonnenuntergang", &Font24, WHITE, BLACK);
+            yStart += 26;
+            Paint_DrawString_EN(230, yStart, &ctime_sunset[0], &Font24, WHITE, BLACK);
             yStart += 26;
 
             // last update
@@ -179,9 +181,9 @@ void openweather(std::string msg)
                     stationName = weatherData["name"];
                     time_t sunset = weatherData["sys"]["sunset"];
     
-                    strftime(ctime_update, 80, "Letzte Aktualisiserung: %H:%M", data);
+                    strftime(ctime_update, 80, "Letzte Aktualisiserung: %H:%M Uhr", data);
                     data = localtime(&sunset);
-                    strftime(ctime_sunset, 60, "Sonnenuntergang: %H:%M", data);
+                    strftime(ctime_sunset, 60, "10%H:%M", data);
 
                     std::cout << ctime_update;
     
@@ -190,7 +192,6 @@ void openweather(std::string msg)
                     std::cout << "Pressure: " << pressure << "hPa" << std::endl;
                     std::cout << "Description: " << weatherDescription << std::endl;
                     std::cout << "Wind Speed: " << windSpeed << " m/s" << std::endl;
-                    std::cout << "Sunset: " << ctime_update << std::endl;
                     std::cout << "Station Name: " << stationName << std::endl;
 
                 }
