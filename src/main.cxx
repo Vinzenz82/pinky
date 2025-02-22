@@ -25,6 +25,7 @@ int handle_lg;
 
 double temperature = 0;
 double pressure = 0;
+double windSpeed = 0;
 
 void display(std::string msg)
 {
@@ -60,7 +61,7 @@ void display(std::string msg)
             std::cout << "show window BMP-----------------" << std::endl;
             Paint_SelectImage(BlackImage);
             Paint_Clear(WHITE);
-            GUI_ReadBmp("./pic/snowman.bmp", 10, 10);
+            GUI_ReadBmp("./pic/HanniSonne.bmp", 10, 10);
 
             yStart = 10;
             
@@ -70,15 +71,15 @@ void display(std::string msg)
             Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
             yStart += 26;
         
-            snprintf(buffer, 10, "%.1fgC", temperature);
+            snprintf(buffer, 10, "%.1foC", temperature);
             std::cout << "Temp: " << buffer << std::endl;
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 36;
         
-            Paint_DrawString_EN(200, yStart, "Luftdruck", &Font24, WHITE, BLACK);
+            Paint_DrawString_EN(200, yStart, "Wind", &Font24, WHITE, BLACK);
             yStart += 26;
         
-            snprintf(buffer, 10, "%.1fhPa", pressure);
+            snprintf(buffer, 10, "%.1fm/s", windSpeed);
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 26;
         
@@ -156,7 +157,7 @@ void openweather(std::string msg)
                     temperature = weatherData["main"]["temp"].get<double>() - 273.15;
                     double humidity = weatherData["main"]["humidity"];
                     pressure = weatherData["main"]["pressure"];
-                    double windSpeed = weatherData["wind"]["speed"];
+                    windSpeed = weatherData["wind"]["speed"];
                     std::string weatherDescription = weatherData["weather"][0]["description"];
                     std::string stationName = weatherData["name"];
     
