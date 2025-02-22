@@ -157,7 +157,7 @@ void openweather(std::string msg)
             }
             lgGpioWrite(handle_lg, PIN_LED_GREEN, LED_OFF);
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::seconds(60));
     }
     curl_easy_cleanup(curl);
 }
