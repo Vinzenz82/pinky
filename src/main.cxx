@@ -68,8 +68,8 @@ void display(std::string msg)
             std::cout << "show window BMP-----------------" << std::endl;
             Paint_SelectImage(BlackImage);
             Paint_Clear(WHITE);
-            //GUI_ReadBmp("./pic/sun_smile.bmp", 1, 1);
-            GUI_ReadBmp_16Gray("./pic/wolken_256.bmp", 1, 1);
+            GUI_ReadBmp("./pic/wolken_mono.bmp", 1, 1);
+            //GUI_ReadBmp_16Gray("./pic/wolken_16.bmp", 1, 1);
 
             yStart = 10;
             
