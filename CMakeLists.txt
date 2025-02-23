@@ -174,5 +174,7 @@ add_custom_command(TARGET HelloWorld POST_BUILD
                       COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/snowman.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
                       COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/sun.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
                       COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/sun_smile.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
+                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/JoschiSonne.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
+                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/Sonnenwolke.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
                    )
 

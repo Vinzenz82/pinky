@@ -35,6 +35,7 @@ void display(std::string msg)
 {
     char buffer[80];
     uint16_t yStart = 10;
+    int StringLength = 0;
 
     if(DEV_Module_Init()!=0){
         std::cerr << "DEV_Module_Init fails..." << std::endl;
@@ -67,7 +68,8 @@ void display(std::string msg)
             std::cout << "show window BMP-----------------" << std::endl;
             Paint_SelectImage(BlackImage);
             Paint_Clear(WHITE);
-            GUI_ReadBmp("./pic/sun_smile.bmp", 1, 1);
+            //GUI_ReadBmp("./pic/sun_smile.bmp", 1, 1);
+            GUI_ReadBmp("./pic/Sonnenwolke.bmp", 1, 1);
 
             yStart = 10;
             
@@ -91,8 +93,12 @@ void display(std::string msg)
             yStart += 36;
 
             // Description
-            snprintf(buffer, 60, "%s", weatherDescription.c_str());
-            Paint_DrawString_EN(170, yStart, &buffer[0] , &Font24, WHITE, BLACK);
+            StringLength = snprintf(buffer, 60, "%s", weatherDescription.c_str());
+            if( StringLength < 14 ) {
+                Paint_DrawString_EN(170, yStart, &buffer[0] , &Font24, WHITE, BLACK);
+            } else {
+                Paint_DrawString_EN(170, yStart, &buffer[0] , &Font16, WHITE, BLACK);
+            }
             yStart += 36;
 
             // Sunset
