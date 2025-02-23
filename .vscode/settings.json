@@ -72,6 +72,9 @@
         "fstream": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "stdio.h": "c",
+        "gui_bmpfile.h": "c",
+        "debug.h": "c"
     }
 }

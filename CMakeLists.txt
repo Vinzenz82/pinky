@@ -170,12 +170,6 @@ add_custom_command(TARGET HelloWorld POST_BUILD
 #                     COMMAND scp ${CMAKE_CURRENT_BINARY_DIR}/HelloWorld scp://vinzenz@192.168.1.209
 #                     #COMMAND scp ${PROJECT_SOURCE_DIR}/src/pictures/cat_mouse.bmp scp://vinzenz@192.168.1.209
                       COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/pic/
-                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/cat_mouse.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
-                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/snowman.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
-                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/sun.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
-                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/sun_smile.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
-                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/JoschiSonne.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
-                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/Sonnenwolke.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
-                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/cloud_rainbow_16.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
+                      COMMAND cp ${PROJECT_SOURCE_DIR}/src/pictures/*.bmp ${CMAKE_CURRENT_BINARY_DIR}/pic/
                    )
 
