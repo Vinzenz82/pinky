@@ -70,7 +70,7 @@ void display(std::string msg)
             Paint_Clear(WHITE);
             //GUI_ReadBmp("./pic/sun_smile.bmp", 1, 1);
             //GUI_ReadBmp("./pic/Sonnenwolke.bmp", 1, 1);
-            GUI_ReadBmp_16Gray("./pic/cloud_rainbow_16.bmp", 1, 1);
+            GUI_ReadBmp_4Gray("./pic/cloud_rainbow_16.bmp", 1, 1);
 
             yStart = 10;
             
