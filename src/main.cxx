@@ -81,18 +81,18 @@ void display(std::string msg)
             Paint_DrawString_EN(230, yStart, &buffer[0] , &Font24, WHITE, BLACK);
         
             // Temp
-            yStart = 44 + 20;
+            yStart = 44 + 30;
             snprintf(buffer, 10, "%5.1foC", temperature);
             Paint_DrawString_EN(265, yStart, &buffer[0], &Font24, WHITE, BLACK);
         
             // Wind
-            yStart = 132 + 20;
+            yStart = 132 + 15;
             snprintf(buffer, 10, "%5.1fm/s", windSpeed);
             Paint_DrawString_EN(250, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 36;
 
             // Sunset
-            yStart = yStart = 196 + 20;;
+            yStart = yStart = 196 + 14;;
             Paint_DrawString_EN(230, yStart, &ctime_sunset[0], &Font24, WHITE, BLACK);
 
             // Description
@@ -106,7 +106,7 @@ void display(std::string msg)
 
             // last update
             Paint_DrawLine(0,280,400,280, BLACK, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
-            Paint_DrawString_EN(10, 290, &ctime_update[0], &Font16, WHITE, BLACK);
+            Paint_DrawString_EN(10, 285, &ctime_update[0], &Font16, WHITE, BLACK);
         
             EPD_4IN2_V2_Display(BlackImage);
             //DEV_Delay_ms(2000);
