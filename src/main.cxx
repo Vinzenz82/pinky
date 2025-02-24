@@ -106,7 +106,7 @@ void display(std::string msg)
 
             // last update
             Paint_DrawLine(0,280,400,280, BLACK, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
-            Paint_DrawString_EN(10, 285, &ctime_update[0], &Font16, WHITE, BLACK);
+            Paint_DrawString_EN(10, 282, &ctime_update[0], &Font16, WHITE, BLACK);
         
             EPD_4IN2_V2_Display(BlackImage);
             //DEV_Delay_ms(2000);
