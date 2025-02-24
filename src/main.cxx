@@ -68,7 +68,8 @@ void display(std::string msg)
             std::cout << "show window BMP-----------------" << std::endl;
             Paint_SelectImage(BlackImage);
             Paint_Clear(WHITE);
-            GUI_ReadBmp("./pic/wolken_mono.bmp", 1, 1);
+            GUI_ReadBmp("./pic/wolken_1bit.bmp", 1, 1);
+            GUI_ReadBmp("./pic/picto_temperatur_1bit.bmp", 200, 56);
             //GUI_ReadBmp_16Gray("./pic/wolken_16.bmp", 1, 1);
 
             yStart = 10;
@@ -79,7 +80,7 @@ void display(std::string msg)
             yStart += 46;
         
             // Temp
-            Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
+            //Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
             yStart += 26;
             snprintf(buffer, 10, "%5.1foC", temperature);
             Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
