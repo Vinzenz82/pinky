@@ -70,7 +70,8 @@ void display(std::string msg)
             Paint_Clear(WHITE);
             GUI_ReadBmp("./pic/wolken_1bit.bmp", 1, 1);
             GUI_ReadBmp("./pic/picto_temperatur_1bit.bmp", 200, 46);
-            GUI_ReadBmp("./pic/picto_wind_1bit.bmp", 200, 116);
+            GUI_ReadBmp("./pic/picto_wind_1bit.bmp", 200, 121);
+            GUI_ReadBmp("./pic/picto_sunset_1bit.bmp", 200, 196);
             //GUI_ReadBmp_16Gray("./pic/wolken_16.bmp", 1, 1);
 
             yStart = 10;
@@ -81,17 +82,19 @@ void display(std::string msg)
             yStart += 46;
         
             // Temp
-            //Paint_DrawString_EN(200, yStart, "Temperatur", &Font24, WHITE, BLACK);
-            //yStart += 26;
             snprintf(buffer, 10, "%5.1foC", temperature);
-            Paint_DrawString_EN(240, yStart, &buffer[0], &Font24, WHITE, BLACK);
-            yStart += 36;
+            Paint_DrawString_EN(250, yStart, &buffer[0], &Font24, WHITE, BLACK);
         
             // Wind
-            //Paint_DrawString_EN(200, yStart, "Wind", &Font24, WHITE, BLACK);
-            //yStart += 26;
+            yStart = 121 + 10;
             snprintf(buffer, 10, "%5.1fm/s", windSpeed);
-            Paint_DrawString_EN(230, yStart, &buffer[0], &Font24, WHITE, BLACK);
+            Paint_DrawString_EN(250, yStart, &buffer[0], &Font24, WHITE, BLACK);
+            yStart += 36;
+
+            // Sunset
+            Paint_DrawString_EN(140, yStart, "Sonnenuntergang", &Font24, WHITE, BLACK);
+            yStart = yStart = 196 + 10;;
+            Paint_DrawString_EN(230, yStart, &ctime_sunset[0], &Font24, WHITE, BLACK);
             yStart += 36;
 
             // Description
@@ -101,13 +104,6 @@ void display(std::string msg)
             } else {
                 Paint_DrawString_EN(170, yStart, &buffer[0] , &Font16, WHITE, BLACK);
             }
-            yStart += 36;
-
-            // Sunset
-            Paint_DrawString_EN(140, yStart, "Sonnenuntergang", &Font24, WHITE, BLACK);
-            yStart += 26;
-            Paint_DrawString_EN(230, yStart, &ctime_sunset[0], &Font24, WHITE, BLACK);
-            yStart += 26;
 
             // last update
             Paint_DrawString_EN(10, 270, &ctime_update[0], &Font16, WHITE, BLACK);
