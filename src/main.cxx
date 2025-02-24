@@ -70,20 +70,20 @@ void display(std::string msg)
             Paint_Clear(WHITE);
             GUI_ReadBmp("./pic/wolken_1bit.bmp", 1, 1);
             GUI_ReadBmp("./pic/picto_temperatur_1bit.bmp", 200, 44);
-            GUI_ReadBmp("./pic/picto_wind_1bit.bmp", 200, 131);
-            GUI_ReadBmp("./pic/picto_sunset_1bit.bmp", 160, 196);
+            GUI_ReadBmp("./pic/picto_wind_1bit.bmp", 190, 134);
+            GUI_ReadBmp("./pic/picto_sunset_1bit.bmp", 150, 194);
             //GUI_ReadBmp_16Gray("./pic/wolken_16.bmp", 1, 1);
 
             yStart = 10;
             
             // Station Name
             snprintf(buffer, 60, "%s", stationName.c_str());
-            Paint_DrawString_EN(210, yStart, &buffer[0] , &Font24, WHITE, BLACK);
-            yStart += 46;
+            Paint_DrawString_EN(230, yStart, &buffer[0] , &Font24, WHITE, BLACK);
         
             // Temp
+            yStart = 44 + 20;
             snprintf(buffer, 10, "%5.1foC", temperature);
-            Paint_DrawString_EN(250, yStart, &buffer[0], &Font24, WHITE, BLACK);
+            Paint_DrawString_EN(260, yStart, &buffer[0], &Font24, WHITE, BLACK);
         
             // Wind
             yStart = 121 + 10;
@@ -92,9 +92,9 @@ void display(std::string msg)
             yStart += 36;
 
             // Sunset
-            yStart = yStart = 196 + 10;;
+            yStart = yStart = 196 + 20;;
             Paint_DrawString_EN(230, yStart, &ctime_sunset[0], &Font24, WHITE, BLACK);
-            yStart += 36;
+            yStart += 46;
 
             // Description
             StringLength = snprintf(buffer, 60, "%s", weatherDescription.c_str());
