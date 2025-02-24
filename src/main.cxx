@@ -70,7 +70,7 @@ void display(std::string msg)
             Paint_Clear(WHITE);
             GUI_ReadBmp("./pic/wolken_1bit.bmp", 1, 1);
             GUI_ReadBmp("./pic/picto_temperatur_1bit.bmp", 200, 44);
-            GUI_ReadBmp("./pic/picto_wind_1bit.bmp", 190, 134);
+            GUI_ReadBmp("./pic/picto_wind_1bit.bmp", 190, 132);
             GUI_ReadBmp("./pic/picto_sunset_1bit.bmp", 150, 194);
             //GUI_ReadBmp_16Gray("./pic/wolken_16.bmp", 1, 1);
 
@@ -83,10 +83,10 @@ void display(std::string msg)
             // Temp
             yStart = 44 + 20;
             snprintf(buffer, 10, "%5.1foC", temperature);
-            Paint_DrawString_EN(260, yStart, &buffer[0], &Font24, WHITE, BLACK);
+            Paint_DrawString_EN(265, yStart, &buffer[0], &Font24, WHITE, BLACK);
         
             // Wind
-            yStart = 121 + 10;
+            yStart = 132 + 20;
             snprintf(buffer, 10, "%5.1fm/s", windSpeed);
             Paint_DrawString_EN(250, yStart, &buffer[0], &Font24, WHITE, BLACK);
             yStart += 36;
@@ -94,9 +94,9 @@ void display(std::string msg)
             // Sunset
             yStart = yStart = 196 + 20;;
             Paint_DrawString_EN(230, yStart, &ctime_sunset[0], &Font24, WHITE, BLACK);
-            yStart += 46;
 
             // Description
+            yStart += 41;
             StringLength = snprintf(buffer, 60, "%s", weatherDescription.c_str());
             if( StringLength < 20 ) {
                 Paint_DrawString_EN(10, yStart, &buffer[0] , &Font24, WHITE, BLACK);
@@ -105,7 +105,8 @@ void display(std::string msg)
             }
 
             // last update
-            Paint_DrawString_EN(10, 280, &ctime_update[0], &Font16, WHITE, BLACK);
+            Paint_DrawLine(0,280,400,280, BLACK, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+            Paint_DrawString_EN(10, 290, &ctime_update[0], &Font16, WHITE, BLACK);
         
             EPD_4IN2_V2_Display(BlackImage);
             //DEV_Delay_ms(2000);
